@@ -28,7 +28,7 @@ class C_vendedor():
                 self.E_numero.focus_set()
 
 
-    def __init__(self, tela, Boleano, argumento):
+    def __init__(self, tela, Boleano, argumento= list()):
         cls(tela)
         self.lb_titulo = Label(tela, text= 'Cadastrar Novo vendedor')
         self.lb_numero = Label(tela, text= 'N° do vendedor: ')

@@ -74,7 +74,7 @@ class C_cliente():
         for it in lista:
             menu.add_command(label=it, command=lambda op=it: self.vuf.set(op))
 
-    def __init__(self, tela, Boleano, argumento):
+    def __init__(self, tela, Boleano, argumento= list()):
         cls(tela)
         #====== Labels =======================
         self.lb_titulo = Label(tela, text= 'Novo cliente')
