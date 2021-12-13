@@ -2274,8 +2274,6 @@ class copu():
                 varBar.set(cont)
                 tela.update()
             print(cont)
-        except Exception as ex:
-            print(ex)
-        else:
+        finally:
             from modulos.copula.update import upda
             up = upda(tela)

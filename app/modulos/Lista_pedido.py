@@ -1,40 +1,49 @@
 from tkinter import *
 from tkinter import ttk
 from modulos.banco import dql
-from modulos import cls
+
 
 class L_pedido():
+    def cls(self,tela):#limpa o frame da tela
+        for items in tela.winfo_children():
+            items.destroy()
+
     def buscar(self):
         lista = []
-        vquery = 'SELECT * FROM tb_pedidos ORDER BY RAND () LIMIT 50'
-        lista = dql(vquery)
-        for (dt, nf, catp, grop, c, v, qt, vt) in lista:
-            self.tv.insert("","end", values=(dt, nf, catp, grop, c, v, qt, vt))
+        try:
+            vquery = 'SELECT * FROM tb_pedidos ORDER BY RAND () LIMIT 50'
+            lista = dql(vquery)
+            for (dt, nf, catp, grop, c, v, qt, vt) in lista:
+                self.tv.insert("","end", values=(dt, nf, catp, grop, c, v, qt, vt))
+        finally:
+            return
 
     def Pesquisar(self):
         lista = []
         pes = self.et_pes.get()
         op = self.op_select.get()
-        if op == 'Data':
-            vquery = f"SELECT * FROM tb_pedidos WHERE data LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
-        elif op =='NF':
-            vquery = f"SELECT * FROM tb_pedidos WHERE nf LIKE '%{pes}%'"
-        elif op == 'Categoria':
-            vquery = f"SELECT * FROM tb_pedidos WHERE categoria_produto LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
-        elif op == 'Grupo':
-            vquery = f"SELECT * FROM tb_pedidos WHERE grupo_produto LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
-        elif op == 'Cliente':
-            vquery = f"SELECT * FROM tb_pedidos WHERE cliente LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
-        elif op == 'Vendedor':
-            vquery = f"SELECT * FROM tb_pedidos WHERE vendedor LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
-        self.tv.delete(*self.tv.get_children())
-        lista = dql(vquery)
-        for (dt, nf, catp, grop, c, v, qt, vt) in lista:
-            self.tv.insert("","end", values=(dt, nf, catp, grop, c, v, qt, vt))
-
+        try:
+            if op == 'Data':
+                vquery = f"SELECT * FROM tb_pedidos WHERE data LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
+            elif op =='NF':
+                vquery = f"SELECT * FROM tb_pedidos WHERE nf LIKE '%{pes}%'"
+            elif op == 'Categoria':
+                vquery = f"SELECT * FROM tb_pedidos WHERE categoria_produto LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
+            elif op == 'Grupo':
+                vquery = f"SELECT * FROM tb_pedidos WHERE grupo_produto LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
+            elif op == 'Cliente':
+                vquery = f"SELECT * FROM tb_pedidos WHERE cliente LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
+            elif op == 'Vendedor':
+                vquery = f"SELECT * FROM tb_pedidos WHERE vendedor LIKE '%{pes}%' ORDER BY RAND () LIMIT 50"
+            self.tv.delete(*self.tv.get_children())
+            lista = dql(vquery)
+            for (dt, nf, catp, grop, c, v, qt, vt) in lista:
+                self.tv.insert("","end", values=(dt, nf, catp, grop, c, v, qt, vt))
+        finally:
+            return
     
     def __init__(self, tela):
-        cls(tela)
+        self.cls(tela)
         self.tv = ttk.Treeview(tela, columns= ('dt', 'nf', 'catp', 'grop', 'c', 'v', 'qt', 'vt'), show='headings', height=26)
         self.tv.column('dt', minwidth=0, width=90)
         self.tv.column('nf', minwidth=0, width=80)

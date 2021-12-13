@@ -1,11 +1,14 @@
 #modulo frame do cadastro de novo cliente
 from tkinter import *
 from tkinter import messagebox
-from modulos.banco import dml
-from modulos.banco import dql
-from modulos import cls
+from modulos.banco import dml, dql
 
-class C_cliente():
+
+class Cadastra_cliente():
+    def cls(self,tela):#limpa o frame da tela
+        for items in tela.winfo_children():
+            items.destroy()
+
     def bc_cliente(self,bole,confirma):
         lista = []
         numero = self.et_numero.get()
@@ -47,22 +50,28 @@ class C_cliente():
 
     def busca_r(self):
         lista = []
-        vquery = "SELECT regiao FROM tb_regiao;"
-        resposta =  dql(vquery)
-        for item in resposta:
-            for f in item:
-                lista.append(f)
-        return lista
+        try:
+            vquery = "SELECT regiao FROM tb_regiao;"
+            resposta =  dql(vquery)
+            for item in resposta:
+                for f in item:
+                    lista.append(f)
+            return lista
+        finally:
+            return [0]
 
     def busca_uf(self):
         regiao = self.vregiao.get()
         lista = []
-        vquery = f"SELECT uf FROM tb_uf WHERE regiao = '{regiao}';"
-        resposta =  dql(vquery)
-        for item in resposta:
-            for f in item:
-                lista.append(f)
-        return lista
+        try:
+            vquery = f"SELECT uf FROM tb_uf WHERE regiao = '{regiao}';"
+            resposta =  dql(vquery)
+            for item in resposta:
+                for f in item:
+                    lista.append(f)
+            return lista
+        finally:
+            return [0]
 
     def call_back(self, *args):
         lista = self.busca_uf()
@@ -74,8 +83,8 @@ class C_cliente():
         for it in lista:
             menu.add_command(label=it, command=lambda op=it: self.vuf.set(op))
 
-    def __init__(self, tela, Boleano, argumento= list()):
-        cls(tela)
+    def __init__(self, tela):
+        self.cls(tela)
         #====== Labels =======================
         self.lb_titulo = Label(tela, text= 'Novo cliente')
         self.lb_numero = Label(tela, text= 'N° do cliente: ')
@@ -103,13 +112,9 @@ class C_cliente():
         self.op_uf = OptionMenu(tela, self.vuf,'')
 
 
-        self.btn = Button(tela, text='Salvar', command=lambda: self.bc_cliente(Boleano,argumento[0]))
+        self.btn = Button(tela, text='Salvar', command=self.bc_cliente)
 
-        if Boleano:
-            self.et_numero.insert(END,argumento[0])      
-            self.et_cliente.insert(END,argumento[1])
-            self.et_cidade.insert(END,argumento[2])
-
+        
 
         #======coloca na tela=========================
         self.lb_titulo.grid(column = 0, row = 0, columnspan=4)

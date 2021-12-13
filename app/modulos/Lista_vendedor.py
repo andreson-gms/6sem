@@ -1,15 +1,22 @@
 from tkinter import *
 from tkinter import ttk
 from modulos.banco import dql
-from modulos import cls, t_vendedor
+
 
 class L_vendedor():
+    def cls(self,tela):#limpa o frame da tela
+        for items in tela.winfo_children():
+            items.destroy()
+
     def R_lista(self):
         lista = []
-        vquery = 'SELECT * FROM tb_vendedor'
-        lista = dql(vquery)
-        for (id, nome) in lista:
-            self.tv.insert("","end", values=(id, nome))
+        try:
+            vquery = 'SELECT * FROM tb_vendedor'
+            lista = dql(vquery)
+            for (id, nome) in lista:
+                self.tv.insert("","end", values=(id, nome))
+        finally:
+            return
 
     def Pesquisar(self):
         lista = []
@@ -20,13 +27,20 @@ class L_vendedor():
         for (id, nome) in lista:
             self.tv.insert("","end", values=(id, nome))
     
-    def Editar(self, tela):
-        itemSelecionado = self.tv.selection()[0]
-        valores = self.tv.item(itemSelecionado, "values")
-        t_vendedor(tela, TRUE, *valores)
+    def Editar(self,tela):
+        try:
+            itemSelecionado = self.tv.selection()[0]
+            valores = self.tv.item(itemSelecionado, "values")
+            from modulos.Editar_vendedor import Ediat_v
+            novo = Ediat_v(tela, *valores)
+    
+        except Exception as ex:
+            print(ex)
+        finally:
+            pass
 
     def __init__(self, tela):
-        cls(tela)
+        self.cls(tela)
         
 
         self.tv = ttk.Treeview(tela, columns= ('id', 'nome'), show='headings', height=26)

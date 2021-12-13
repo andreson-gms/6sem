@@ -1,6 +1,7 @@
 # este modulo realiza a conexao com o banco de dados
 import mysql.connector as cnn
 from mysql.connector import Error
+from tkinter import messagebox
 
 #import os
 
@@ -15,7 +16,7 @@ def conexaoDB():
     try:
         con = cnn.connect(host = HOST,database = DBS, user = USER, password = PASS)
     except Error as ex:
-        print(f"ERRO!!!!:   {ex}")
+        messagebox.showerror("!!ERROR!!", ex)
     return con
 
 

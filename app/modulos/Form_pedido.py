@@ -1,15 +1,19 @@
 #modulo Frame do cadastro de novo pedido
 from tkinter import *
 from tkinter import ttk
-from modulos import cls
 
-class C_pedido():
+
+class Cadastra_pedido():
+    def cls(self,tela):#limpa o frame da tela
+        for items in tela.winfo_children():
+            items.destroy()
+
     def bc_pedido(self):
         pass
 
 
     def __init__(self, tela):
-        cls(tela)
+        self.cls(tela)
         self.lb_titulo = Label(tela, text= 'Novo Pedido: ')
         self.lb_data = Label(tela, text= 'Data: ')
         self.lb_nf = Label(tela, text= 'NF: ')
