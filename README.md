@@ -12,27 +12,27 @@ esta aplicação necessitou de uma bliblioteca para conecxão com o banco de dad
 # Docker 
 foi utilizado um conteine para a Mysql para armazenar os dados e um conteiner PhpMyAdmin para gerenciar, ambos criados atraves do seguinte Compose:
 
-       version: '3'
-        services:
+    version: '3'
+    services:
         db:
             image: mysql:5.7
             environment:
-            MYSQL_ROOT_PASSWORD: "Cloud21!"
-            MYSQL_DATABASE: "appdb"
+                MYSQL_ROOT_PASSWORD: "Cloud21!"
+                MYSQL_DATABASE: "appdb"
             ports:
-            - "3306:3306"
+                - "3306:3306"
             volumes:
-            - ./Volumes/MySql:/var/lib/mysql
+                - ./Volumes/MySql:/var/lib/mysql
             networks:
-            - mysql-network
+                - mysql-network
         phpmyadmin:
             image: phpmyadmin
             ports:
-            - 8080:80
+                - 8080:80
             networks:
-            - mysql-network
+                - mysql-network
             environment:
-            - PMA_ARBITRARY=1
+                - PMA_ARBITRARY=1
         networks: 
-        mysql-network:
-            driver: bridge
+            mysql-network:
+                driver: bridge
