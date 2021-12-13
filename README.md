@@ -5,7 +5,7 @@ Esta aplicação tem por objetivo realiza as interaçoe do usuario com o banco d
 
 
 # Venv
-Esta aplicação necessita de uma biblioteca para conexão com o banco de dados
+Esta aplicação necessita da biblioteca mysql-connector para comunicação com o banco de dados
 
     pip install mysql-connector-python
     
