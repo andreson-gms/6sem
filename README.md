@@ -11,6 +11,7 @@ Esta aplicação necessita de uma biblioteca para conexão com o banco de dados
     
 # Docker 
 Foi utilizado um contêiner do Mysql para armazenar os dados e um conteiner do PhpMyAdmin para gerenciar, ambos criados atraves do seguinte Compose:
+
     version: '3'
     services:
         db:
