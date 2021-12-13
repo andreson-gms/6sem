@@ -5,13 +5,11 @@ esta aplicação tem por objetivo realiza as interaçoe do usuario com o banco d
 
 
 # Venv
-
     esta aplicação necessitou de uma bliblioteca para conecxão com o banco de dados
 
         pip install mysql-connector-python
     
 # Docker 
-
     foi utilizado um conteine para a Mysql para armazenar os dados e um conteiner PhpMyAdmin para gerenciar, ambos criados atraves do seguinte Compose:
 
         version: '3'
