@@ -3,115 +3,141 @@ from tkinter import *
 from tkinter import ttk
 
 class copu():
+    def cls(self,tela):#limpa o frame da tela
+        for items in tela.winfo_children():
+            items.destroy()
+
     def __init__(self, tela):
+        self.cls(tela)
         try:
             cont = 0
             varBar = DoubleVar()
             varBar.set(0)
 
+            proce = Label(tela, text='1/2', font=("Arial", 45)).pack()
+
             pb = ttk.Progressbar(tela, variable= varBar, maximum= 2127)
-            pb.pack()
+            label= Label(tela,text= f'{cont} / 2127')
+            pb.pack(ipadx=300, ipady= 5)
+            label.pack()
             
             vquery ="CREATE TABLE `tb_cidade` (  `cidade` varchar(100) NOT NULL,  `uf` varchar(15) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery ="CREATE TABLE `tb_Clientes` (  `cod_cliente` int(30) NOT NULL,  `cliente` varchar(120) NOT NULL,  `cidade` varchar(30) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery ="CREATE TABLE `tb_pedidos` (  `data` varchar(45) NOT NULL,  `nf` int(45) NOT NULL,  `categoria_produto` varchar(45) NOT NULL,  `grupo_produto` varchar(45) NOT NULL,  `cliente` int(30) NOT NULL,  `vendedor` int(45) NOT NULL,  `quantidade` int(45) NOT NULL,  `valor_total` decimal(45,0) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery ="CREATE TABLE `tb_regiao` (  `regiao` varchar(15) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery ="CREATE TABLE `tb_uf` (  `uf` varchar(15) NOT NULL,  `regiao` varchar(15) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery ="CREATE TABLE `tb_vendedor` (  `cod_vendedor` int(11) NOT NULL,  `vendedor` varchar(45) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_cidade`  ADD PRIMARY KEY (`cidade`),  ADD KEY `uf` (`uf`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_Clientes`  ADD PRIMARY KEY (`cod_cliente`),  ADD KEY `cidade` (`cidade`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_pedidos`  ADD KEY `fk_cliente_pedido` (`cliente`),  ADD KEY `fk_vendedor_pedido` (`vendedor`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_regiao`  ADD PRIMARY KEY (`regiao`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_uf`  ADD PRIMARY KEY (`uf`),  ADD KEY `regiao` (`regiao`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_vendedor`  ADD PRIMARY KEY (`cod_vendedor`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
             #=============
             vquery = "ALTER TABLE `tb_cidade`  ADD CONSTRAINT `tb_cidade_ibfk_1` FOREIGN KEY (`uf`) REFERENCES `tb_uf` (`uf`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_Clientes`  ADD CONSTRAINT `tb_clientes_ibfk_1` FOREIGN KEY (`cidade`) REFERENCES `tb_cidade` (`cidade`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "ALTER TABLE `tb_pedidos`  ADD CONSTRAINT `fk_cliente_pedido` FOREIGN KEY (`cliente`) REFERENCES `tb_Clientes` (`cod_cliente`),  ADD CONSTRAINT `fk_vendedor_pedido` FOREIGN KEY (`vendedor`) REFERENCES `tb_vendedor` (`cod_vendedor`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery ="ALTER TABLE `tb_uf`  ADD CONSTRAINT `tb_uf_ibfk_1` FOREIGN KEY (`regiao`) REFERENCES `tb_regiao` (`regiao`);"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
 
             vquery = "COMMIT;"
             dml(vquery)
             cont = cont+1
             varBar.set(cont)
+            label.configure(text= f'{cont} / 2127')
             tela.update()
             #===================
 
@@ -135,6 +161,7 @@ class copu():
                 dml(vquery)
                 cont = cont+1
                 varBar.set(cont)
+                label.configure(text= f'{cont} / 2127')
                 tela.update()
 
 
@@ -147,6 +174,7 @@ class copu():
                 dml(vquery)
                 cont = cont+1
                 varBar.set(cont)
+                label.configure(text= f'{cont} / 2127')
                 tela.update()
 
             lista_uf = [('0', 'Exterior'),
@@ -182,6 +210,7 @@ class copu():
                 dml(vquery)
                 cont = cont+1
                 varBar.set(cont)
+                label.configure(text= f'{cont} / 2127')
                 tela.update()
 
 
@@ -478,6 +507,7 @@ class copu():
                 dml(vquery)
                 cont = cont+1
                 varBar.set(cont)
+                label.configure(text= f'{cont} / 2127')
                 tela.update()
 
             
@@ -1642,6 +1672,7 @@ class copu():
                 dml(vquery)
                 cont = cont+1
                 varBar.set(cont)
+                label.configure(text= f'{cont} / 2127')
                 tela.update()
 
             lista_cliente2 = [
@@ -2272,6 +2303,7 @@ class copu():
                 dml(vquery)
                 cont = cont+1
                 varBar.set(cont)
+                label.configure(text= f'{cont} / 2127')
                 tela.update()
             print(cont)
         finally:
