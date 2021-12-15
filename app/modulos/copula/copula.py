@@ -14,7 +14,7 @@ class copu():
             varBar = DoubleVar()
             varBar.set(0)
 
-            proce = Label(tela, text='1/2', font=("Arial", 45)).pack()
+            proce = Label(tela, text='Processo:          1/2', font=("Arial", 45)).pack()
 
             pb = ttk.Progressbar(tela, variable= varBar, maximum= 2127)
             label= Label(tela,text= f'{cont} / 2127')
